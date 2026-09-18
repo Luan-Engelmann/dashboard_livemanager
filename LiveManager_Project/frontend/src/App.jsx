@@ -1,8 +1,7 @@
-// O App agora é responsável unicamente por gerenciar as URLs e envolver as telas protegidas com o ProtectedRoute.
-
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
+import DashboardLayout from './components/layout/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import Instagram from './pages/Instagram';
 import TikTok from './pages/TikTok';
@@ -15,18 +14,27 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Se tentar acessar a raiz, joga para o login */}
+        {/* Redireciona a raiz para login */}
         <Route path="/" element={<Navigate to="/login" replace />} />
         
         {/* Rota Pública */}
         <Route path="/login" element={<Login />} />
         
-        {/* Rotas Protegidas envolvidas pelo verificador de token */}
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/dashboard/instagram" element={<ProtectedRoute><Instagram /></ProtectedRoute>} />
-        <Route path="/dashboard/tiktok" element={<ProtectedRoute><TikTok /></ProtectedRoute>} />
-        <Route path="/dashboard/youtube" element={<ProtectedRoute><YouTube /></ProtectedRoute>} />
-        <Route path="/dashboard/twitch" element={<ProtectedRoute><Twitch /></ProtectedRoute>} />
+        {/* Rotas Protegidas sob o DashboardLayout Global */}
+        <Route 
+          path="/dashboard" 
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="youtube" element={<YouTube />} />
+          <Route path="twitch" element={<Twitch />} />
+          <Route path="instagram" element={<Instagram />} />
+          <Route path="tiktok" element={<TikTok />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
