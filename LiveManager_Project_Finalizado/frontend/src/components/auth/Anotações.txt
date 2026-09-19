@@ -1,0 +1,8 @@
+Como o ProtectedRoute verifica a autenticação
+O ProtectedRoute lê de forma síncrona o localStorage.getItem('token') a cada renderização da rota.
+
+Como o React Router intercepta a tentativa de navegação, o componente avalia o token antes de carregar a tela final.
+
+Como os dados residem na persistência do navegador (localStorage), apertar F5 recarrega a página, a aplicação monta novamente, o ProtectedRoute revalida o token que continuou salvo ali e permite a permanência do usuário.
+
+Se o token for apagado, o Navigate reescreve imediatamente a URL forçando o /login.

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { background-color: #08090d; color: #fff; overflow: hidden; }
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* Layout Global & Sidebar */
+.app-layout { display: flex; height: 100vh; background-color: #08090d; overflow: hidden; }
+.main-content { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+.content-area { flex: 1; overflow-y: auto; position: relative; scroll-behavior: smooth; }
+
+.global-header { height: 70px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; padding: 0 24px; justify-content: space-between; background: rgba(17, 19, 26, 0.95); backdrop-filter: blur(10px); z-index: 10; position: sticky; top: 0; }
+.menu-toggle { display: none; background: none; border: none; color: #fff; cursor: pointer; padding: 8px; margin-right: 12px; }
+
+.sidebar-container { width: 250px; background-color: #11131a; border-right: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; z-index: 50; flex-shrink: 0; transition: transform 0.3s ease; }
+.sidebar-logo { padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.sidebar-menu { padding: 24px 16px; flex: 1; overflow-y: auto; }
+.sidebar-footer { padding: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
+.menu-group { margin-bottom: 24px; }
+.menu-title { font-size: 11px; color: #636472; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin: 0 0 12px 12px; }
+
+/* Navegação Sidebar */
+.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; color: #9898a6; text-decoration: none; border-radius: 8px; transition: all 0.18s ease; font-size: 14px; font-weight: 500; margin-bottom: 4px; border-left: 3px solid transparent; }
+.nav-item svg { width: 18px; height: 18px; color: #9898a6; transition: color 0.18s ease; }
+.nav-item:hover { background: rgba(255,255,255,0.02); color: #d4d4d8; }
+
+.nav-item.active { color: #fff; font-weight: 600; }
+.nav-item.active svg { color: #fff; }
+
+.nav-item.home.active { border-left-color: #2878ff; background: rgba(40, 120, 255, 0.08); }
+.nav-item.home:hover svg, .nav-item.home.active svg { color: #2878ff; }
+.nav-item.yt.active { border-left-color: #ff0000; background: rgba(255,0,0,0.08); }
+.nav-item.yt:hover svg, .nav-item.yt.active svg { color: #ff0000; }
+.nav-item.ig.active { border-left-color: #E1306C; background: rgba(225,48,108,0.08); }
+.nav-item.ig:hover svg, .nav-item.ig.active svg { color: #E1306C; }
+.nav-item.tk.active { border-left-color: #00f2fe; background: rgba(0,242,254,0.08); }
+.nav-item.tk:hover svg, .nav-item.tk.active svg { color: #00f2fe; }
+.nav-item.tw.active { border-left-color: #9146FF; background: rgba(145,70,255,0.08); }
+.nav-item.tw:hover svg, .nav-item.tw.active svg { color: #9146FF; }
+.nav-item.sys.active { border-left-color: #9898a6; background: rgba(152,152,166,0.08); }
+
+.mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 40; backdrop-filter: blur(2px); }
+
+/* Páginas e Grids */
+.analytics-page { width: 100%; max-width: 1400px; margin: 0 auto; padding: 32px 24px; color: #fff; display: flex; flex-direction: column; gap: 24px; }
+.page-header-strip { padding-left: 12px; margin-bottom: 8px; }
+
+.dashboard-main { display: flex; flex-direction: column; gap: 24px; width: 100%; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.grid-row { display: grid; gap: 20px; align-items: stretch; }
+
+.premium-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; }
+
+@media (max-width: 992px) {
+  .sidebar-container { position: fixed; height: 100vh; transform: translateX(-100%); }
+  .sidebar-container.open { transform: translateX(0); }
+  .mobile-overlay.open { display: block; }
+  .menu-toggle { display: block; }
+}
